@@ -11,9 +11,9 @@
         android:orientation="vertical" >
 
         <RelativeLayout
+            android:id="@+id/left_menu_item1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-
             <ImageView
                 android:id="@+id/id_img1"
                 android:layout_width="50dp"
@@ -35,6 +35,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/left_menu_item2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
@@ -59,6 +60,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/left_menu_item3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
@@ -83,6 +85,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/left_menu_item4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
@@ -107,6 +110,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/left_menu_item5"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
@@ -132,5 +136,8 @@
 
 
     </LinearLayout>
+
+    <include
+        layout="@layout/menu_left_title" />
 
 </RelativeLayout>

@@ -24,31 +24,31 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_music"
-        android:tag="Music" />
+        android:src="@drawable/arc_text"
+        android:tag="Text" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_place"
-        android:tag="Place" />
+        android:src="@drawable/arc_camera"
+        android:tag="camera" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_sleep"
-        android:tag="Sleep" />
+        android:src="@drawable/arc_record"
+        android:tag="Record" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_thought"
-        android:tag="Sun" />
+        android:src="@drawable/arc_alarm"
+        android:tag="Alarm" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_with"
-        android:tag="People" />
+        android:src="@drawable/arc_file"
+        android:tag="File" />
 
 </com.liezh.onerecord.view.ArcMenu>
