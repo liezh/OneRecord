@@ -2,9 +2,11 @@ package com.liezh.onerecord;
 
 import java.util.List;
 
-import android.R.integer;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,16 +17,17 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.liezh.onerecord.dao.NoteBookDao;
 import com.liezh.onerecord.dao.RecordDao;
+import com.liezh.onerecord.entity.NoteBook;
 import com.liezh.onerecord.entity.Record;
 import com.liezh.onerecord.tool.RecordListAdapter;
-import com.liezh.onerecord.tool.RecordListAdapter.ViewHolder;
 import com.liezh.onerecord.view.ArcMenu;
 import com.liezh.onerecord.view.ArcMenu.OnMenuItemClickListener;
-import com.nineoldandroids.view.ViewHelper;
 
 public class MainActivity extends Activity {
 
@@ -33,6 +36,7 @@ public class MainActivity extends Activity {
 	private ListView mListView;
 	private List<String> mDatas;
 	private RecordAsyncTask asyncTask;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +46,17 @@ public class MainActivity extends Activity {
 		asyncTask = new RecordAsyncTask();
 		asyncTask.execute("record");
 		initEvent();
+//		initData();
+	}
+	
+	private void initData() {
+		NoteBook notebook = new NoteBook("第一个记事本");
+		NoteBookDao dao = new NoteBookDao(MainActivity.this, "MyRecord.db", 1);
+		dao.save(notebook);
+		List<NoteBook> list = dao.getAllNoteBook();
+		System.out.println("notebook --- " + list.get(0).getBook_name());
+		dao.close();
+		System.out.println("初始数据成功！！！");
 	}
 
 	@Override
@@ -87,8 +102,32 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-//				int tag = (ViewHolder)view.
-//				System.out.println("tag---"+tag);
+				Record record = (Record) mListView.getItemAtPosition(position);
+				System.out.println("item --- " + record.toString());
+				Intent intent = new Intent(MainActivity.this,EditRecord.class);
+				Bundle extras = new Bundle();
+				extras.putInt(Record.ID, record.getId());
+				extras.putString(Record.TITLE, record.getTitle());
+				extras.putString(Record.CONTENT, record.getContent());
+				extras.putString(Record.CREATE_DATE, record.getCreate_date());
+				extras.putString(Record.STAR_DATE, record.getStar_date());
+				extras.putInt(Record.CATEGORY, record.getCategory());
+				extras.putInt(Record.STATE, record.getState());
+				intent.putExtras(extras);
+				startActivity(intent);
+				
+			}
+		});
+		
+		// 长按item就弹出对话框提醒删除
+		mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Record record = (Record) mListView.getItemAtPosition(position);
+				dialog(record.getId());
+				return true;
 			}
 		});
 		
@@ -140,6 +179,29 @@ public class MainActivity extends Activity {
 		});
 	}
 	
+	protected void dialog(final int rid) {
+		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		builder.setMessage("确定要删除吗?");
+		builder.setTitle("提示");
+		builder.setPositiveButton("确认",
+				new android.content.DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						RecordDao dao = new RecordDao(MainActivity.this, "MyRecord.db", 1);
+						dao.setStateTo0ByRid(rid);
+						onRestart();
+					}
+				});
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+		builder.create().show();
+	}
 	
 	/**
 	 * 实现了数据库的异步访问
@@ -152,7 +214,7 @@ public class MainActivity extends Activity {
 		protected List<Record> doInBackground(String... params) {
 			RecordDao dao = new RecordDao(MainActivity.this, "MyRecord.db", 1);
 			//按照表明查找所有数据，并以list返回
-			List<Record> list = dao.getAllRecord();
+			List<Record> list = dao.getAllState1Record();
 			dao.close();
 //			System.out.println("count--" + list.size());
 			return list;
@@ -177,6 +239,31 @@ public class MainActivity extends Activity {
 		asyncTask.execute("record");
 	}
 	
+	// 左边菜单的各个监听事件
+	
+	public void getAllRecord(View view) {
+		onRestart();
+	}
+	
+	public void getAllNoteBook(View view) {
+		Intent intent = new Intent(MainActivity.this, NoteBookActivity.class);
+		startActivity(intent);
+	}
+	
+	public void getAllRecovery(View view) {
+		Intent intent = new Intent(MainActivity.this, RecoveryActivity.class);
+		startActivity(intent);
+	}
+	
+	public void uploadToCloud(View view) {
+		Intent intent = new Intent(MainActivity.this, CloudActivity.class);
+		startActivity(intent);
+	}
+	public void getAllTheme(View view) {
+		Intent intent = new Intent(MainActivity.this, ThemeActivity.class);
+		startActivity(intent);
+
+	}
 	
 	
 }

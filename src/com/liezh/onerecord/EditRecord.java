@@ -4,10 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,7 +13,6 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,8 +21,13 @@ import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -35,75 +37,110 @@ import com.liezh.onerecord.dao.RecordDao;
 import com.liezh.onerecord.entity.NoteBook;
 import com.liezh.onerecord.entity.Record;
 import com.liezh.onerecord.tool.BasiceTool;
-import com.liezh.onerecord.tool.MyOpenHelper;
 
-@SuppressLint("NewApi")
-public class AddRecord extends Activity {
+public class EditRecord extends Activity {
 
+	private Record mRecord;
 	private static final int RES_CAMERA = 1;
 	private static final int RES_PICTURE = 2;
 
 	// 添加页面的控件
 	private EditText et_title, et_content;
-	private TextView tv_class, tv_date, tv_top;
+	private TextView tv_class, tv_date;
 	private String myPath = null;
+	private ImageView iv_edit,iv_picture,iv_camera;
 	private String dp_date;
 	private String tp_time;
-	private int categ;
-
 	
+	private int categ = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_activity);
+		setContentView(R.layout.edit_activity);
+		mRecord = new Record();
 		initAllView();
-		// initData();
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
-		int action = bundle.getInt("action");
-		initAction(action);
+		initData(bundle);
 
 	}
 
-	private void initAction(int action) {
-		switch (action) {
-		case 1:
+	private void initData(Bundle bundle) {
+		System.out.println("ID---" + bundle.getInt(Record.ID));
+		mRecord.setId(bundle.getInt(Record.ID));
+		mRecord.setTitle(bundle.getString(Record.TITLE));
+		mRecord.setContent(bundle.getString(Record.CONTENT));
+		mRecord.setCreate_date(bundle.getString(Record.CREATE_DATE));
+		mRecord.setStar_date(bundle.getString(Record.STAR_DATE));
+		mRecord.setCategory(bundle.getInt(Record.CATEGORY));
+		mRecord.setState(bundle.getInt(Record.STATE));
 
-			break;
-		case 2:
-			startCamera(new View(AddRecord.this));
-			break;
-		case 3:
-			// startCamera(new View(AddRecord.this));
-			break;
-
-		default:
-			break;
-		}
-
-	}
-
-	private void initData() {
-		Record record = new Record("my second record title",
-				"my second record content", "2014-12-23", "2014-12-24", 2, 2);
-		RecordDao dao = new RecordDao(AddRecord.this, "MyRecord.db", 1);
-		dao.save(record);
+		et_title.setText(mRecord.getTitle());
+		et_content.setText(BasiceTool.setPhotoToHtml(mRecord.getContent()));
+		
+		NoteBookDao dao = new NoteBookDao(EditRecord.this, "MyRecord.db", 1);
+		String s = dao.getBookNameByCategory(mRecord.getCategory());
 		dao.close();
-		System.out.println("初始数据成功！！！");
+		tv_class.setText(s);
+		tv_date.setText(mRecord.getStar_date());
+
 	}
 
 	private void initAllView() {
-		et_title = (EditText) findViewById(R.id.et_title);
-		et_content = (EditText) findViewById(R.id.et_content);
-		tv_class = (TextView) findViewById(R.id.tv_class);
-		tv_date = (TextView) findViewById(R.id.tv_date);
-		tv_top = (TextView) findViewById(R.id.tv_top);
-		
+		et_title = (EditText) findViewById(R.id.edit_et_title);
+		et_content = (EditText) findViewById(R.id.edit_et_content);
+		tv_class = (TextView) findViewById(R.id.edit_tv_class);
+		tv_date = (TextView) findViewById(R.id.edit_tv_date);
+		iv_edit = (ImageView) findViewById(R.id.iv_edit);
+		iv_picture = (ImageView) findViewById(R.id.edit_iv_picture);
+		iv_camera = (ImageView) findViewById(R.id.edit_iv_camera);
 		et_content.setSingleLine(false);
 		et_content.setHorizontallyScrolling(false);
+		et_title.setEnabled(false);
+		et_content.setEnabled(false);
+		tv_class.setClickable(false);
+		tv_date.setClickable(false);
+		iv_picture.setClickable(false);
+		iv_camera.setClickable(false);
 	}
 
+	public void editButton(View view) {
+		et_title.setEnabled(true);
+		et_content.setEnabled(true);
+		tv_class.setClickable(true);
+		tv_date.setClickable(true);
+		iv_picture.setClickable(true);
+		iv_camera.setClickable(true);
+		iv_edit.startAnimation(scaleBigAnim(300));
+		
+	}
+	
+	/**
+	 * 单击了的子按钮将变大，并消失
+	 * 
+	 * @param duration
+	 * @return
+	 */
+	private Animation scaleBigAnim(int duration)
+	{
+		AnimationSet animationSet = new AnimationSet(true);
+		// 变大动画设置，变大4倍，持续时间为duration
+		ScaleAnimation scaleAnim = new ScaleAnimation(1.0f, 4.0f, 1.0f, 4.0f,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);
+		// 透明度动画，从有到无
+		AlphaAnimation alphaAnim = new AlphaAnimation(1f, 0.0f);
+
+		animationSet.addAnimation(scaleAnim);
+		animationSet.addAnimation(alphaAnim);
+
+		animationSet.setDuration(duration);
+		animationSet.setFillAfter(true);
+		return animationSet;
+
+	}
+	
 	// 调用系统相册
 	public void startAlbume(View view) {
 		Intent picture = new Intent(Intent.ACTION_PICK,
@@ -156,14 +193,17 @@ public class AddRecord extends Activity {
 		}
 
 	}
+	
 
 	// 从添加页面中保存，所有的信息到数据库
-	public void save(View view) {
+	@SuppressLint("SimpleDateFormat")
+	public void updata(View view) {
 		Editable editable = et_content.getText();
 		System.out.println("Editable----" + editable + "--------"
 				+ editable.length() + "+++++++" + editable.toString() + "\n"
 				+ Html.toHtml(editable));
 		Record record = new Record();
+		record.setId(mRecord.getId());
 		record.setTitle(et_title.getText().toString());
 		System.out.println("html--" + Html.toHtml(editable).toString());
 		record.setContent(Html.toHtml(editable).toString());
@@ -177,16 +217,82 @@ public class AddRecord extends Activity {
 		record.setStar_date(dp_date + " " + tp_time);
 		record.setState(1);
 		record.setCategory(categ);
-
-		RecordDao dao = new RecordDao(AddRecord.this, "MyRecord.db", 1);
-		dao.save(record);
+		RecordDao dao = new RecordDao(EditRecord.this, "MyRecord.db", 1);
+		dao.update(record);
 		dao.close();
 		// System.out.println("date-----"+df.format(date));
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 ) {
+			if (et_content.getText().toString().equals("")
+					&& et_title.getText().toString().equals("")) {
+				Toast.makeText(EditRecord.this, "记录为空，不与保存！", Toast.LENGTH_LONG)
+						.show();
+				EditRecord.this.finish();
+			} else {
+				dialog();
+			}
+		}
+		return true;
+	}
+	
+	protected void dialog() {
+		AlertDialog.Builder builder = new Builder(EditRecord.this);
+		builder.setMessage("确定要保存吗?");
+		builder.setTitle("提示");
+		builder.setPositiveButton("确认",
+				new android.content.DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						updata(new View(EditRecord.this));
+						EditRecord.this.finish();
+					}
+				});
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						EditRecord.this.finish();
+					}
+				});
+		builder.create().show();
+	}
+	
+	@SuppressWarnings("null")
+	public void dialogClass(View view) {
+		AlertDialog.Builder builder = new Builder(EditRecord.this);
+		builder.setTitle("选择笔记本");
+		NoteBookDao dao = new NoteBookDao(EditRecord.this, "MyRecord.db", 1);
+		final List<NoteBook> list = dao.getAllNoteBook();
+		
+		String[] items = new String[list.size()];
+		for(int i=0 ; i<list.size() ; i++){
+			System.out.println("list---"+ i +"---"+ list.get(i).getBook_name().toString());
+			items[i] = list.get(i).getBook_name();
+		}
+		builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				System.out.println(list.get(which).getNid());
+				tv_class.setText(list.get(which).getBook_name());
+				categ = list.get(which).getNid();
+				dialog.dismiss();
+			}
+			
+		});
+		builder.create().show();
+		dao.close();
+	}
+	
 	public void dialogDateAndTime(View view) {
-		AlertDialog.Builder builder = new Builder(AddRecord.this);
-		LayoutInflater factory = LayoutInflater.from(AddRecord.this);
+		AlertDialog.Builder builder = new Builder(EditRecord.this);
+		LayoutInflater factory = LayoutInflater.from(EditRecord.this);
 		final View myView = factory.inflate(R.layout.date_choice, null);
 		builder.setView(myView);
 		builder.setTitle("选择提醒日期和时间！");
@@ -222,73 +328,4 @@ public class AddRecord extends Activity {
 		
 		builder.create().show();
 	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			if (et_content.getText().toString().equals("")
-					&& et_title.getText().toString().equals("")) {
-				Toast.makeText(AddRecord.this, "记录为空，不与保存！", Toast.LENGTH_LONG)
-						.show();
-				AddRecord.this.finish();
-			} else {
-				dialog();
-			}
-		}
-		return true;
-	}
-
-	protected void dialog() {
-		AlertDialog.Builder builder = new Builder(AddRecord.this);
-		builder.setMessage("确定要保存吗?");
-		builder.setTitle("提示");
-		builder.setPositiveButton("确认",
-				new android.content.DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						save(tv_top);
-						AddRecord.this.finish();
-					}
-				});
-		builder.setNegativeButton("取消",
-				new android.content.DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
-		builder.create().show();
-	}
-	
-	@SuppressWarnings("null")
-	public void dialogClass(View view) {
-		AlertDialog.Builder builder = new Builder(AddRecord.this);
-		builder.setTitle("选择笔记本");
-		NoteBookDao dao = new NoteBookDao(AddRecord.this, "MyRecord.db", 1);
-		final List<NoteBook> list = dao.getAllNoteBook();
-		
-		String[] items = new String[list.size()];
-		for(int i=0 ; i<list.size() ; i++){
-			System.out.println("list---"+ i +"---"+ list.get(i).getBook_name().toString());
-			items[i] = list.get(i).getBook_name();
-		}
-		builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				System.out.println(list.get(which).getNid());
-				tv_class.setText(list.get(which).getBook_name());
-				categ = list.get(which).getNid();
-				dialog.dismiss();
-			}
-			
-		});
-		builder.create().show();
-		dao.close();
-	}
-	
-	
-
 }

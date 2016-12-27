@@ -23,25 +23,25 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_place"
+        android:src="@drawable/arc_text"
         android:tag="Place" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_sleep"
+        android:src="@drawable/arc_camera"
         android:tag="Sleep" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_thought"
+        android:src="@drawable/arc_record"
         android:tag="Sun" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/composer_with"
+        android:src="@drawable/arc_alarm"
         android:tag="People" />
 
 </com.liezh.onerecord.view.ArcMenu>

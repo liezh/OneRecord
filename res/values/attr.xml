@@ -10,21 +10,33 @@
     <attr name="radius" format="dimension" />
     <attr name="offset" format="dimension" />
 
+    <!-- 这是定制的卫星按钮的属性 -->
     <declare-styleable name="ArcMenu">
         <attr name="position" />
         <attr name="radius" />
         <attr name="offset" />
     </declare-styleable>
+    
+    <!-- 这是定制的左侧滑动的菜单栏 -->
     <declare-styleable name="FlyInMenu">
         <attr name="animationDuration" format="integer" />
         <attr name="menu" format="reference" />
         <attr name="content" format="reference" />
     </declare-styleable>
 
+    
+    <!-- 这是左侧的抽屉式菜单栏的属性，比上面的操作更简单 -->
     <attr name="rightPadding" format="dimension"></attr>
 
     <declare-styleable name="SlidingMenu">
         <attr name="rightPadding"></attr>
     </declare-styleable>
 
+	<!-- 这是自定义的浮动imageButton的属性 -->
+    <declare-styleable name="FAB">
+        <!-- Background color -->
+        <attr name="bg_color" format="color|reference"/>
+        <attr name="bg_color_pressed" format="color|reference"/>
+    </declare-styleable>
+    
 </resources>

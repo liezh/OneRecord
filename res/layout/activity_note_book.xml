@@ -9,7 +9,7 @@
     
     
      <com.liezh.onerecord.view.SlidingMenu
-        android:id="@+id/sliding_menu"
+        android:id="@+id/notebook_sliding_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/qianxun"
@@ -29,7 +29,7 @@
                 
                 
                 <ListView 
-                    android:id="@+id/list_syn"
+                    android:id="@+id/notebook_list_syn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />

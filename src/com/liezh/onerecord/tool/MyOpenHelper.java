@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.liezh.onerecord.entity.NoteBook;
 import com.liezh.onerecord.entity.Record;
 
 public class MyOpenHelper extends SQLiteOpenHelper {
@@ -33,6 +34,9 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 				+ Record.STAR_DATE + " varchar,"
 				+ Record.CATEGORY +" int,"
 				+ Record.STATE + " int)");
+		db.execSQL("create table if not exists "+ NoteBook.TABLE_NAME + "("
+				+ NoteBook.NID +" integer primary key," 
+				+ NoteBook.BOOK_NAME + " varchar)");
 		System.out.println("创建数据库完成！！");
 		Log.e("DB","创建数据库完成！！");
 //		Toast.makeText(myContext, "数据库创建成功！", Toast.LENGTH_LONG).show();

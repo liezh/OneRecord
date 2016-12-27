@@ -9,15 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.liezh.onerecord.R;
-import com.liezh.onerecord.entity.Record;
+import com.liezh.onerecord.entity.NoteBook;
 
-public class RecordListAdapter extends BaseAdapter {
+public class NoteBookListAdapter extends BaseAdapter {
 
-	private List<Record> mList;
+	private List<NoteBook> mList;
 	private LayoutInflater mInflater;
 
-
-	public RecordListAdapter(Context context, List<Record> data) {
+	public NoteBookListAdapter(Context context, List<NoteBook> data) {
 		mList = data;
 		mInflater = LayoutInflater.from(context);
 	}
@@ -40,36 +39,32 @@ public class RecordListAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.activity_synopsis, null);
-			viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
-			viewHolder.tvDate = (TextView) convertView.findViewById(R.id.tv_date);
-			viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
-			Record record = mList.get(position);
+			convertView = mInflater.inflate(R.layout.notebook_item, null);
+			viewHolder.tvBookName = (TextView) convertView.findViewById(R.id.tv_nb_name);
+			viewHolder.tvCount = (TextView) convertView.findViewById(R.id.tv_nb_count);
+			NoteBook NoteBook = mList.get(position);
 			
-			viewHolder.tvTitle.setText(record.getTitle());
-			viewHolder.tvDate.setText(record.getCreate_date());
-//			System.out.println("befor--" + record.getContent());
-			String content = BasiceTool.getContentFromHtml(record.getContent());
-//			System.out.println("after--" + content);
-			viewHolder.tvContent.setText(content);
+			viewHolder.tvBookName.setText(NoteBook.getBook_name());
+			viewHolder.tvCount.setText("¼ÇÂ¼Êý--"+String.valueOf(NoteBook.getCount()));
 			convertView.setTag(viewHolder);
 			
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+		
 		return convertView;
 	}
 
 	public class ViewHolder {
-		public TextView tvTitle, tvContent, tvDate;
+		public TextView tvBookName;
+		public TextView tvCount;
 	}
 
-	
-	
 
 }

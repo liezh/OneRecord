@@ -41,9 +41,9 @@ public class RecordDao {
 		Cursor cursor = db.query(Record.TABLE_NAME, null, null, null, null,
 				null, Record.CREATE_DATE + " DESC");
 		cursor.moveToFirst();
+
 		if (cursor.getCount() != 0)
-			for(int i = 0 ; i<cursor.getCount() ; i++)
-			{
+			for (int i = 0; i < cursor.getCount(); i++) {
 				Record r = new Record();
 				r.setId(Integer.valueOf(cursor.getString(0)));
 				r.setTitle(cursor.getString(1));
@@ -56,9 +56,123 @@ public class RecordDao {
 				list.add(r);
 				cursor.moveToNext();
 			}
-		
-//		System.out.println("dao count " + list.size() + "cur "+cursor.getCount());
+
+		// System.out.println("dao count " + list.size() +
+		// "cur "+cursor.getCount());
 		return list;
+	}
+
+	public List<Record> getAllState1Record() {
+		List<Record> list = new ArrayList<Record>();
+		Cursor cursor = db.query(Record.TABLE_NAME, null, Record.STATE
+				+ "=?", new String[] { String.valueOf(1) }, null,
+				null, Record.CREATE_DATE + " DESC");
+		cursor.moveToFirst();
+
+		if (cursor.getCount() != 0)
+			for (int i = 0; i < cursor.getCount(); i++) {
+				Record r = new Record();
+				r.setId(Integer.valueOf(cursor.getString(0)));
+				r.setTitle(cursor.getString(1));
+				r.setContent(cursor.getString(2));
+				r.setCreate_date(cursor.getString(3));
+				r.setStar_date(cursor.getString(4));
+				r.setCategory(Integer.valueOf(cursor.getString(5)));
+				r.setState(Integer.valueOf(cursor.getString(6)));
+				// Log.e("record", r.toString());
+				list.add(r);
+				cursor.moveToNext();
+			}
+
+		// System.out.println("dao count " + list.size() +
+		// "cur "+cursor.getCount());
+		return list;
+	}
+
+	
+	public List<Record> getAllRecordByNid(int nid) {
+		List<Record> list = new ArrayList<Record>();
+		Cursor cursor = db.query(Record.TABLE_NAME, null, Record.CATEGORY
+				+ "=?", new String[] { String.valueOf(nid) }, null, null,
+				Record.CREATE_DATE + " DESC");
+		cursor.moveToFirst();
+		if (cursor.getCount() != 0)
+			for (int i = 0; i < cursor.getCount(); i++) {
+				Record r = new Record();
+				r.setId(Integer.valueOf(cursor.getString(0)));
+				r.setTitle(cursor.getString(1));
+				r.setContent(cursor.getString(2));
+				r.setCreate_date(cursor.getString(3));
+				r.setStar_date(cursor.getString(4));
+				r.setCategory(Integer.valueOf(cursor.getString(5)));
+				r.setState(Integer.valueOf(cursor.getString(6)));
+				// Log.e("record", r.toString());
+				list.add(r);
+				cursor.moveToNext();
+			}
+		return list;
+	}
+
+	public int setStateTo0ByRid(int rid) {
+		ContentValues values = new ContentValues();
+		values.put(Record.STATE, 0);
+		int id = db.update(Record.TABLE_NAME, values, Record.ID + "=?",
+				new String[] { String.valueOf(rid) });
+		return id;
+	}
+	
+	public List<Record> getAllState1RecordByNid(int nid) {
+		List<Record> list = new ArrayList<Record>();
+		Cursor cursor = db.query(Record.TABLE_NAME, null, Record.STATE
+				+ "=? AND " + Record.CATEGORY + "=?",
+				new String[] { String.valueOf(1), String.valueOf(nid) }, null,
+				null, Record.CREATE_DATE + " DESC");
+		cursor.moveToFirst();
+		if (cursor.getCount() != 0)
+			for (int i = 0; i < cursor.getCount(); i++) {
+				Record r = new Record();
+				r.setId(Integer.valueOf(cursor.getString(0)));
+				r.setTitle(cursor.getString(1));
+				r.setContent(cursor.getString(2));
+				r.setCreate_date(cursor.getString(3));
+				r.setStar_date(cursor.getString(4));
+				r.setCategory(Integer.valueOf(cursor.getString(5)));
+				r.setState(Integer.valueOf(cursor.getString(6)));
+				// Log.e("record", r.toString());
+				list.add(r);
+				cursor.moveToNext();
+			}
+		return list;
+	}
+
+	public List<Record> getAllStateNot1Record() {
+		List<Record> list = new ArrayList<Record>();
+		Cursor cursor = db.query(Record.TABLE_NAME, null,
+				Record.STATE + "<>? ", new String[] { String.valueOf(1) },
+				null, null, Record.CREATE_DATE + " DESC");
+		cursor.moveToFirst();
+		if (cursor.getCount() != 0)
+			for (int i = 0; i < cursor.getCount(); i++) {
+				Record r = new Record();
+				r.setId(Integer.valueOf(cursor.getString(0)));
+				r.setTitle(cursor.getString(1));
+				r.setContent(cursor.getString(2));
+				r.setCreate_date(cursor.getString(3));
+				r.setStar_date(cursor.getString(4));
+				r.setCategory(Integer.valueOf(cursor.getString(5)));
+				r.setState(Integer.valueOf(cursor.getString(6)));
+				// Log.e("record", r.toString());
+				list.add(r);
+				cursor.moveToNext();
+			}
+		return list;
+	}
+
+	public int getCountByCategory(int nid) {
+		Cursor cursor = db.query(Record.TABLE_NAME, null, Record.CATEGORY
+				+ "=?", new String[] { String.valueOf(nid) }, null, null,
+				Record.CREATE_DATE + " DESC");
+		return cursor.getCount();
 	}
 
 	public Long save(Record record) {
@@ -76,9 +190,14 @@ public class RecordDao {
 
 	public int update(Record record) {
 		ContentValues values = new ContentValues();
-		values.put(Record.ID, record.getId());
-		int id = db.update(Record.TABLE_NAME, values,
-				Record.ID + "=" + record.getId(), null);
+		values.put(Record.TITLE, record.getTitle());
+		values.put(Record.CONTENT, record.getContent());
+		values.put(Record.CREATE_DATE, record.getCreate_date());
+		values.put(Record.STAR_DATE, record.getStar_date());
+		values.put(Record.CATEGORY, record.getCategory());
+		values.put(Record.STATE, record.getState());
+		int id = db.update(Record.TABLE_NAME, values, Record.ID + "=?",
+				new String[] { String.valueOf(record.getId()) });
 		return id;
 	}
 

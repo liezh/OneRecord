@@ -13,7 +13,9 @@
         <RelativeLayout
             android:id="@+id/left_menu_item1"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="getAllRecord" >
             <ImageView
                 android:id="@+id/id_img1"
                 android:layout_width="50dp"
@@ -21,7 +23,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/img_1" />
+                android:src="@drawable/note" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -29,7 +31,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_img1"
-                android:text="第一个Item"
+                android:text="@string/letf_menu_item1"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -37,7 +39,9 @@
         <RelativeLayout
             android:id="@+id/left_menu_item2"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="getAllNoteBook" >
 
             <ImageView
                 android:id="@+id/id_img2"
@@ -46,7 +50,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/img_2" />
+                android:src="@drawable/notebook" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,7 +58,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_img2"
-                android:text="第二个Item"
+                android:text="@string/letf_menu_item2"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -62,7 +66,9 @@
         <RelativeLayout
             android:id="@+id/left_menu_item3"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="getAllRecovery" >
 
             <ImageView
                 android:id="@+id/id_img3"
@@ -71,7 +77,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/img_3" />
+                android:src="@drawable/recovery" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,7 +85,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_img3"
-                android:text="第三个Item"
+                android:text="@string/letf_menu_item3"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -87,7 +93,9 @@
         <RelativeLayout
             android:id="@+id/left_menu_item4"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="uploadToCloud" >
 
             <ImageView
                 android:id="@+id/id_img4"
@@ -96,7 +104,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/img_4" />
+                android:src="@drawable/cloud" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,7 +112,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_img4"
-                android:text="第四个Item"
+                android:text="@string/letf_menu_item4"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -112,7 +120,9 @@
         <RelativeLayout
             android:id="@+id/left_menu_item5"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="getAllTheme" >
 
             <ImageView
                 android:id="@+id/id_img5"
@@ -121,7 +131,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/img_5" />
+                android:src="@drawable/theme" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,7 +139,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_img5"
-                android:text="第五个Item"
+                android:text="@string/letf_menu_item5"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
         </RelativeLayout>

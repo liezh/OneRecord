@@ -7,8 +7,8 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="21" />
-    
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +24,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.liezh.onerecord.AddRecord"></activity>
+        <activity android:name=".AddRecord" >
+        </activity>
+        <activity android:name=".EditRecord" >
+        </activity>
+        <activity
+            android:name=".NoteBookActivity"
+            android:label="@string/title_activity_note_book" >
+        </activity>
+        <activity
+            android:name=".RecoveryActivity"
+            android:label="@string/title_activity_recovery" >
+        </activity>
+        <activity
+            android:name=".CloudActivity"
+            android:label="@string/title_activity_cloud" >
+        </activity>
+        <activity
+            android:name=".ThemeActivity"
+            android:label="@string/title_activity_theme" >
+        </activity>
+        <activity
+            android:name=".NoteBookCatalogActivity"
+            android:label="@string/title_activity_note_book_catalog" >
+        </activity>
     </application>
 
 </manifest>
