@@ -1,0 +1,53 @@
+<com.liezh.liezhcomponent.view.ArcMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:liezh="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/arc_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    liezh:position="right_bottom"
+    liezh:radius="140dp"
+    liezh:offset="30dp" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/composer_button" >
+
+        <ImageView
+            android:id="@+id/id_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/composer_icn_plus" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arc_text"
+        android:tag="Text" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arc_camera"
+        android:tag="camera" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arc_record"
+        android:tag="Record" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arc_alarm"
+        android:tag="Alarm" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arc_file"
+        android:tag="File" />
+
+</com.liezh.liezhcomponent.view.ArcMenu>

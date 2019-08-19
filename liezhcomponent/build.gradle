@@ -1,41 +1,35 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.hujiang.android-aspectjx'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
+
+
     defaultConfig {
-        applicationId "com.liezh.onerecord"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    // 开启数据绑定
-    dataBinding {
-        enabled = true
-    }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    // AOP 运行包
-    implementation 'org.aspectj:aspectjrt:1.8.9'
-    implementation project(path: ':liezhcomponent')
+    // 使用jake大神很多年前的动画库
+    implementation  'com.nineoldandroids:library:2.4.0'
 }

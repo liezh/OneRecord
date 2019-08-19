@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:liezh="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="com.liezh.onerecord.data.model.User" />
@@ -14,59 +14,36 @@
 
     </data>
 
-    <LinearLayout
-        android:layout_height="match_parent"
+    <com.liezh.liezhcomponent.view.SlidingMenu
+        android:id="@+id/sliding_menu"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        liezh:rightPadding="80dp" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{user.username}"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:hint="@string/prompt_email"
-            android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true"
-            android:text="@={user.username}" />
+            <include layout="@layout/left_menu" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@={user.password}"
-            android:hint="@string/prompt_password"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff" >
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/action_sign_in"
-            android:onClick="@{(v) ->presenter.myOnClick(v)}"
-            />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
+                <ListView
+                    android:id="@+id/list_syn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
-    </LinearLayout>
+                <include layout="@layout/menu_right_bottom"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </com.liezh.liezhcomponent.view.SlidingMenu>
 </layout>

@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="SlidingMenu">
+        <attr name="exampleString" format="string" />
+        <attr name="exampleDimension" format="dimension" />
+        <attr name="exampleColor" format="color" />
+        <attr name="exampleDrawable" format="color|reference" />
+        <attr name="rightPadding" format="dimension" />
+    </declare-styleable>
+</resources>
