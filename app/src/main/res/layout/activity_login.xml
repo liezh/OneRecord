@@ -14,62 +14,6 @@
 
     </data>
 
-    <!--<LinearLayout-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@{user.username}"/>-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/username"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:hint="@string/prompt_email"-->
-            <!--android:inputType="textEmailAddress"-->
-            <!--android:selectAllOnFocus="true"-->
-            <!--android:text="@={user.username}" />-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/password"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@={user.password}"-->
-            <!--android:hint="@string/prompt_password"-->
-            <!--android:imeActionLabel="@string/action_sign_in_short"-->
-            <!--android:imeOptions="actionDone"-->
-            <!--android:inputType="textPassword"-->
-            <!--android:selectAllOnFocus="true" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/login"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:enabled="true"-->
-            <!--android:text="@string/action_sign_in"-->
-            <!--android:onClick="@{(v) ->presenter.myOnClick(v)}"-->
-            <!--/>-->
-
-        <!--<ProgressBar-->
-            <!--android:id="@+id/loading"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginStart="32dp"-->
-            <!--android:layout_marginTop="64dp"-->
-            <!--android:layout_marginEnd="32dp"-->
-            <!--android:layout_marginBottom="64dp"-->
-
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="@+id/password"-->
-            <!--app:layout_constraintStart_toStartOf="@+id/password"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_bias="0.3" />-->
-    <!--</LinearLayout>-->
-
 
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -107,29 +51,22 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:layout_gravity="center"
                     android:layout_marginRight="50dp"
                     android:layout_marginLeft="50dp"
+                    android:padding="15dp"
+                    android:inputType="text"
                     android:textColor="#9F9FA0"
                     android:textColorHint="#9F9FA0"
                     android:text="@={user.username}"
                     android:hint="your username"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="#83738F"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"></View>
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:layout_gravity="center"
+                    android:padding="15dp"
+                    android:inputType="textPassword"
                     android:hint="your password"
                     android:text="@={user.password}"
                     android:textColor="#9F9FA0"
@@ -164,6 +101,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="15dp"
                 android:orientation="horizontal">
                 <Button
                     android:layout_width="wrap_content"

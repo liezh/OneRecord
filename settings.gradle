@@ -1,1 +1,1 @@
-include ':app', ':liezhcomponent'
+include ':app', ':liezhcomponent', ':bl', ':commontools'
