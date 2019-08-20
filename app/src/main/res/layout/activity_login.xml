@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:liezh="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="com.liezh.onerecord.data.model.User" />
@@ -14,36 +14,178 @@
 
     </data>
 
-    <com.liezh.liezhcomponent.view.SlidingMenu
-        android:id="@+id/sliding_menu"
+    <!--<LinearLayout-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@{user.username}"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/username"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:hint="@string/prompt_email"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:selectAllOnFocus="true"-->
+            <!--android:text="@={user.username}" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/password"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@={user.password}"-->
+            <!--android:hint="@string/prompt_password"-->
+            <!--android:imeActionLabel="@string/action_sign_in_short"-->
+            <!--android:imeOptions="actionDone"-->
+            <!--android:inputType="textPassword"-->
+            <!--android:selectAllOnFocus="true" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/login"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:enabled="true"-->
+            <!--android:text="@string/action_sign_in"-->
+            <!--android:onClick="@{(v) ->presenter.myOnClick(v)}"-->
+            <!--/>-->
+
+        <!--<ProgressBar-->
+            <!--android:id="@+id/loading"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--android:layout_marginTop="64dp"-->
+            <!--android:layout_marginEnd="32dp"-->
+            <!--android:layout_marginBottom="64dp"-->
+
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/password"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/password"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintVertical_bias="0.3" />-->
+    <!--</LinearLayout>-->
+
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
-        liezh:rightPadding="80dp" >
-
+        tools:context="com.liezh.onerecord.ui.login.LoginActivity">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal" >
-
-            <include layout="@layout/left_menu" />
-
-            <RelativeLayout
+            android:orientation="vertical"
+            android:background="@drawable/background"
+            android:gravity="center">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff" >
-
-
-                <ListView
-                    android:id="@+id/list_syn"
+                android:layout_height="wrap_content"
+                android:paddingBottom="30dp"
+                android:paddingTop="20dp"
+                android:background="#99404348"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Welcome"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:background="#99000000">
+                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:textColor="#9F9FA0"
+                    android:textColorHint="#9F9FA0"
+                    android:text="@={user.username}"
+                    android:hint="your username"/>
 
-                <include layout="@layout/menu_right_bottom"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="#83738F"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"></View>
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_gravity="center"
+                    android:hint="your password"
+                    android:text="@={user.password}"
+                    android:textColor="#9F9FA0"
+                    android:textColorHint="#9F9FA0"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="30dp"
+                android:paddingTop="20dp"
+                android:background="#99404348"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Forget Password?"
+                    android:textColor="#DDDDDD"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Tap Here"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"/>
+            </LinearLayout>
 
-            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonstyle"
+                    android:onClick="@{(v) ->presenter.myOnClick(v)}"
+                    android:text="Login"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/buttonstyle"
+                    android:layout_weight="1"
+                    android:text="Sign in"/>
+            </LinearLayout>
+
         </LinearLayout>
-    </com.liezh.liezhcomponent.view.SlidingMenu>
+
+    </LinearLayout>
+
 </layout>

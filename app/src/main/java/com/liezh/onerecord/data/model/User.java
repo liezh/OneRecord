@@ -16,6 +16,11 @@ public class User extends BaseObservable {
 
     public User() {
     }
+
+    /**
+     * TODO @Bindable 注解字段是否可以进行数据绑定
+     * @return
+     */
     @Bindable
     public Long getId() {
         return id;
@@ -32,6 +37,7 @@ public class User extends BaseObservable {
 
     public void setUsername(String username) {
         this.username = username;
+        // TODO 通知Data Binding 对该字段的控件进行数据更新
         notifyPropertyChanged(BR.username);
     }
 
