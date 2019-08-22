@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.liezh.onerecord.data.model.User" />
+        <import type="com.liezh.bl.model.User" />
 
         <variable
             name="user"
             type="User" />
         <variable
             name="presenter"
-            type="com.liezh.onerecord.ui.login.LoginActivity.Presenter" />
+            type="com.liezh.onerecord.presenters.LoginPresenter" />
 
     </data>
 
@@ -19,7 +19,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.liezh.onerecord.ui.login.LoginActivity">
+        tools:context="com.liezh.onerecord.ui.login.LoginActivity"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -110,7 +111,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/buttonstyle"
-                    android:onClick="@{(v) ->presenter.myOnClick(v)}"
+                    android:onClick="@{(v) ->presenter.submitOnClick(v, user)}"
                     android:text="Login"/>
                 <Button
                     android:layout_width="wrap_content"
@@ -123,6 +124,13 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/login_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

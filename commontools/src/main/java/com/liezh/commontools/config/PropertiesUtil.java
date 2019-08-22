@@ -2,7 +2,7 @@ package com.liezh.commontools.config;
 
 import android.content.res.AssetManager;
 
-import com.liezh.commontools.AppContext;
+import com.liezh.commontools.CommonToolsContext;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,7 +19,7 @@ public class PropertiesUtil {
     static {
         try {
             PROPERTIES = new Properties();
-            ASSET_MANAGER = AppContext.getContext().getApplicationContext().getAssets();
+            ASSET_MANAGER = CommonToolsContext.getContext().getApplicationContext().getAssets();
             InputStream inputStream = ASSET_MANAGER.open(APP_CONFIG);
             PROPERTIES.load(new InputStreamReader(inputStream, "utf-8"));
         } catch (Exception e) {

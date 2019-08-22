@@ -3,7 +3,7 @@ package com.liezh.commontools;
 import android.app.Application;
 import android.content.Context;
 
-public class AppContext extends Application {
+public class CommonToolsContext extends Application {
 
     private static Context instance;
 

@@ -1,4 +1,7 @@
 <resources>
+    <string name="app_versionCode">1</string>
+    <string name="app_versionName">1.0.0</string>
+
     <string name="app_name">OneRecord</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

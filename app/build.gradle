@@ -21,6 +21,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
 }
 
@@ -38,4 +42,6 @@ dependencies {
     // AOP 运行包
     implementation 'org.aspectj:aspectjrt:1.8.9'
     implementation project(path: ':liezhcomponent')
+    implementation project(path: ':commontools')
+    implementation project(path: ':bl')
 }

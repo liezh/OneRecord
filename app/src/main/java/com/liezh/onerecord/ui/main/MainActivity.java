@@ -1,4 +1,4 @@
-package com.liezh.onerecord.ui.login;
+package com.liezh.onerecord.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
