@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.liezh.onerecord.domian.vo.Note" />
+        <variable
+            name="note"
+            type="Note" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--如果vo中的数据类型不是string，在设置text时需要转类型-->
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{note.id.toString()}"
+            android:textColor="@android:color/holo_red_light" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{note.title}"
+            android:textColor="@android:color/holo_red_light" />
+
+        <TextView
+            android:id="@+id/blog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{note.desc}"
+            android:textColor="@android:color/holo_red_light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/holo_blue_bright" />
+    </LinearLayout>
+
+</layout>

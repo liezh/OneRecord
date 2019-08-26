@@ -3,6 +3,9 @@
     xmlns:liezh="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="presenter"
+            type="com.liezh.onerecord.presenters.MainPresenter" />
 
     </data>
 
@@ -26,12 +29,16 @@
                 android:layout_height="match_parent"
                 android:background="#ffffff" >
 
+                <Button
+                    android:id="@+id/add_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加元素" />
 
-                <ListView
-                    android:id="@+id/list_syn"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="match_parent"/>
 
                 <include layout="@layout/menu_right_bottom"/>
 

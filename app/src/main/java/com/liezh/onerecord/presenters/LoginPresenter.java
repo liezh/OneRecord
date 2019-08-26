@@ -14,36 +14,35 @@ import java.util.Map;
 /**
  * 处理业务逻辑和app网络请求等耗时操作
  */
-public class LoginPresenter extends BasePresenter implements LoginInteractor.OnLoginFinishedListener {
+public class LoginPresenter extends BasePresenter<LoginView> implements LoginInteractor.OnLoginFinishedListener {
 
-    private LoginView loginView;
     private LoginInteractor loginInteractor;
 
     public LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {
-        this.loginView = loginView;
+        super.mView = loginView;
         this.loginInteractor = loginInteractor;
     }
 
     @SingleClick
     public void submitOnClick(View view, User user) {
-        if (loginView != null) {
-            loginView.showProgress();
+        if (super.mView != null) {
+            super.mView.showProgress();
         }
         loginInteractor.login(user.getUsername(), user.getPassword(), this);
     }
 
     @Override
     public void onUsernameError() {
-        if (loginView != null) {
-            loginView.hideProgress();
+        if (super.mView != null) {
+            super.mView.hideProgress();
         }
         Log.i("user", "用户名不合法");
     }
 
     @Override
     public void onPasswordError() {
-        if (loginView != null) {
-            loginView.hideProgress();
+        if (super.mView != null) {
+            super.mView.hideProgress();
         }
         Log.i("user", "密码不合法");
     }
@@ -51,6 +50,6 @@ public class LoginPresenter extends BasePresenter implements LoginInteractor.OnL
     @Override
     public void onSuccess() {
         Map<String, Object> argMap = new HashMap<>();
-        loginView.navigateToMain(argMap);
+        super.mView.navigateToMain(argMap);
     }
 }
